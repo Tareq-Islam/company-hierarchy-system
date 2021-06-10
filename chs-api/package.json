@@ -1,0 +1,30 @@
+{
+  "name": "company-hierarchy-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tareq-Islam/company-hierarchy-system.git"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "Mongodb"
+  ],
+  "author": "Tareq Islam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tareq-Islam/company-hierarchy-system/issues"
+  },
+  "homepage": "https://github.com/Tareq-Islam/company-hierarchy-system#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.13"
+  }
+}
