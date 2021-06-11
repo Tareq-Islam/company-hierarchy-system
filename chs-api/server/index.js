@@ -1,11 +1,11 @@
 "user strict";
 // import core module
 const express = require("express");
-const body_parser = require("body-parser");
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 // import dependencies module
-const route = require('./routes'); 
+const route = require("./routes");
 
 module.exports = function () {
   let app = express(),
@@ -13,12 +13,18 @@ module.exports = function () {
     create;
 
   create = (db) => {
+    // parse application/json
+    app.use(bodyParser.json());
+
+
     // add middleware
-    app.use(body_parser.json());
-    app.use(body_parser.urlencoded());
+    app.use(bodyParser.urlencoded({ extended: false }));
+    
 
     // connect to database
     connectDatabse(db.database);
+    
+    route.init(app);
   };
 
   start = (port) => {
@@ -28,7 +34,7 @@ module.exports = function () {
     );
   };
 
-  route.init(app);
+ 
 
   return { create: create, start: start };
 };

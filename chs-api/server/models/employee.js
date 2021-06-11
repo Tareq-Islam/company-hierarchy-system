@@ -5,18 +5,18 @@ const commonTypes = {
   type: String,
   require: true,
   trim: true,
-  lowercase: true
+  lowercase: true,
 };
 
 // create a schema
 const EmployeeSchema = mongoose.Schema({
   firstName: {
     ...commonTypes,
-    maxLength: 50
+    maxLength: 50,
   },
   lastName: {
     ...commonTypes,
-    maxLength: 50
+    maxLength: 50,
   },
   email: {
     type: String,
@@ -29,6 +29,18 @@ const EmployeeSchema = mongoose.Schema({
     trim: true,
     maxLength: 13,
     minLength: 11,
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false
   },
   departmentId: Number,
 });
