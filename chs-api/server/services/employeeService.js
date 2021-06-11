@@ -2,23 +2,28 @@
 // import employee model
 const Employee = require("../models/Employee");
 
-async function getEmployee() {
+async function getEmployee(page = 1, pageSize = 20, status) {
   try {
-    const employee = await Employee.find({ isDeleted: false });
-    if (employee) {
-      const selectedEmployee = employee.map(x => {
-        return {
-          id: x._id,
-          firstName: x.firstName,
-          lastName: x.lastName,
-          email: x.email,
-          mobile: x.mobile,
-          status: x.isActive ? 'active' : 'inactive'
-        }
-      });
+    let employee;
+    if (status) {
+      employee = await Employee
+      .find({ isDeleted: false, isActive: status === 'inactive' ? false : true })
+      .select('firstName lastName email mobile isActive date')
+      .skip((page * pageSize) - pageSize)
+      .limit(pageSize)
+      .sort({firstName: 'asc'});
+    } else {
+      employee = await Employee
+      .find({ isDeleted: false})
+      .select('firstName lastName email mobile isActive date')
+      .skip((page * pageSize) - pageSize)
+      .limit(pageSize);
+    }
+   
+    if (employee) {  
       return {
         success: true,
-        data: selectedEmployee,
+        data: employee,
       };
     }
     return {

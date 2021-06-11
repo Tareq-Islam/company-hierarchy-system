@@ -9,7 +9,8 @@ const employeeService = require('../services/employeeService');
 let router = express.Router();
 
 router.get('/', async (req, res) => {
-   const data = await employeeService.get();
+    const {page, pageSize, status} = req.query;    
+   const data = await employeeService.get(Number(page), Number(pageSize), status);
    res.json(data);
 });
 
