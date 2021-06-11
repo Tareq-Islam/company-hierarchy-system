@@ -8,24 +8,29 @@ const employeeService = require('../services/employeeService');
 // import route
 let router = express.Router();
 
-router.get('/', (req, res) => {
-   const data = employeeService.get();
-   res.send(data);
+router.get('/', async (req, res) => {
+   const data = await employeeService.get();
+   res.json(data);
 });
 
-router.post('/', (req, res) => {
-    const data = employeeService.create(req.body);
+router.post('/', async (req, res) => {
+    const data = await employeeService.create(req.body);
+    res.json(data);
+});
+
+router.put('/:employeeId', async (req, res) => {
+    const data = await employeeService.update({...req.body, id: req.params.employeeId});
     res.send(data);
 });
 
-router.put('/', (req, res) => {
-    const data = employeeService.update(req.body, null);
-    res.send(data);
+router.put('/status/:employeeId', async (req, res) => {
+    const data = await employeeService.changeStatus({...req.body, id: req.params.employeeId});
+    res.json(data);
 });
 
-router.delete('/', (req, res) => {
-    const data = employeeService.delete(req.body);
-    res.send(data);
+router.delete('/:employeeId', async (req, res) => {
+    const data = await employeeService.delete(req.params.employeeId);
+    res.json(data);
 });
 
 
