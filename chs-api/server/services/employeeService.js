@@ -8,7 +8,7 @@ async function getEmployee(page = 1, pageSize = 20, status) {
     if (status) {
       employee = await Employee
       .find({ isDeleted: false, isActive: status === 'inactive' ? false : true })
-      .select('firstName lastName email mobile isActive date')
+      .select("firstName lastName email mobile isActive date")   
       .skip((page * pageSize) - pageSize)
       .limit(pageSize)
       .sort({firstName: 'asc'});
@@ -114,10 +114,10 @@ async function statusUpdateEmployee(employee) {
 
 async function deleteEmployee(id) {
   try {
-    const deletedUser = await Employee.findOneAndUpdate(id, {
+    const deletedEmployee = await Employee.findOneAndUpdate(id, {
       isDeleted: true,
     });
-    if (deletedUser) {
+    if (deletedEmployee) {
       return {
         success: true,
         message: "Employee successfully deleted.",

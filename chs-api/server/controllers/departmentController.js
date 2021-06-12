@@ -8,24 +8,30 @@ const departmentService = require('../services/departmentService');
 // import route
 let router = express.Router();
 
-router.get('/', (req, res) => {
-   const data = departmentService.get();
-   res.send(data);
+router.get('/', async (req, res) => {
+    const {page, pageSize, status} = req.query;    
+   const data = await departmentService.get(Number(page), Number(pageSize), status);
+   res.json(data);
 });
 
-router.post('/', (req, res) => {
-    const data = departmentService.create(req.body);
-    res.send(data);
+router.post('/', async (req, res) => {
+    const data = await departmentService.create(req.body);
+    res.json(data);
 });
 
-router.put('/', (req, res) => {
-    const data = departmentService.update(req.body, null);
-    res.send(data);
+router.put('/:departmentId', async (req, res) => {
+    const data = await departmentService.update({...req.body, id: req.params.departmentId});
+    res.json(data);
 });
 
-router.delete('/', (req, res) => {
-    const data = departmentService.delete(req.body);
-    res.send(data);
+router.put('/status/:departmentId', async (req, res) => {
+    const data = await departmentService.changeStatus({...req.body, id: req.params.departmentId});
+    res.json(data);
+});
+
+router.delete('/:departmentId', async (req, res) => {
+    const data = await departmentService.delete(req.params.departmentId);
+    res.json(data);
 });
 
 
