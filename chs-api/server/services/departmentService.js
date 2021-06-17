@@ -13,7 +13,7 @@ async function getDepartment(page = 1, pageSize = 20, status) {
         .select("name description isActive date")
         .skip(page * pageSize - pageSize)
         .limit(pageSize)
-        .sort({ firstName: "asc" });
+        .sort({ name: "asc" });
     } else {
       department = await Department.find({ isDeleted: false })
         .select("name description isActive date")
