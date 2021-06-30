@@ -2,11 +2,11 @@ import React from 'react';
 import {
   BrowserRouter as Router, Route, Switch
 } from "react-router-dom";
-import Department from "./Department";
-import Employee from "./Employee";
-import Home from "./Home";
-import Nav from "./nav";
-import Role from "./Role";
+import Department from "./Department/Department";
+import Employee from "./Employee/Employee";
+import Home from "./Home/Home";
+import Nav from "./Layout/Header/nav";
+import Role from "./Role/Role";
 
 function App() {
   return (
